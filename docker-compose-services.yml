@@ -1,0 +1,32 @@
+version: "3.6"
+services:
+    profile:
+        image: repo.notavaa.com:5000/sol/profile:latest
+        ports:
+            - "80:80"
+        environment:
+            - ConnectionStrings_DefaultConnection=Host=10.0.1.2;Port=5432;Database=sol;Username=postgres;Password=postgres123
+            - Logging_LogLevel_Default=Information
+            - Logging_LogLevel_Microsoft.AspNetCore=Warning
+            - Jwt_Key=aliaskari9mohammadmahdiabbasi24alisoltani54amirhasansaadati
+            - Jwt_Issuer=ProfileManagement
+            - Jwt_Audience=ProfileManagement
+            - Jwt_TokenLifeTime=00:50:00
+            - Jwt_RefreshTokeLifeTime=30.00:00:00
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: any
+                delay: 5s
+                max_attempts: 5
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "50m"
+        networks:
+            - net1
+networks:
+    net1:
+        external: true

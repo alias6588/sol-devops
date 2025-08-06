@@ -1,0 +1,28 @@
+version: "3.6"
+services:
+    registry:
+        image: registry:2
+        ports:
+            - "5000:5000"
+        environment:
+            - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.cert
+            - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+        volumes:
+            - /root/registry_certs:/certs
+            - /data/registry:/var/lib/registry
+            - /etc/localtime:/etc/localtime:ro
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: any
+                delay: 5s
+                max_attempts: 5
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "50m"
+        networks:
+            - net1
+networks:
+    net1:
+        external: true
