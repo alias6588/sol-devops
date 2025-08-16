@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   profile:
-    image: repo.notavaa.com:5000/sol/profile:latest
+    image: repo.notavaa.com:5000/sol/profile:stage
     env_file:
       - ./.env
     volumes:
@@ -27,7 +27,7 @@ services:
       - net1
 
   back:
-    image: repo.notavaa.com:5000/sol/back:latest
+    image: repo.notavaa.com:5000/sol/back:stage
     env_file:
       - ./.env
     volumes:

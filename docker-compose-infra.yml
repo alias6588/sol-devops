@@ -3,16 +3,14 @@ version: '3.8'
 services:
   postgres:
     image: repo.notavaa.com:5000/postgres:15
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - net1
+    env_file:
+      - ./.env
     deploy:
       placement:
         constraints: [node.role == manager]
