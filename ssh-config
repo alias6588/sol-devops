@@ -1,0 +1,64 @@
+Host sol-dev-services
+  HostName 5.144.134.151
+  User user
+  IdentityFile .ssh/id_ed25519.pub
+  Port 22
+
+Host sol-dev-infra
+  HostName 10.0.1.2
+  User user
+  IdentityFile .ssh/id_ed25519.pub
+  proxyjump sol-dev-services 
+
+Host sol-dev-db-proxy
+  HostName 5.144.134.151
+  User user
+  Port 22
+  IdentityFile ~/.ssh/id_ed25519
+  LocalForward 54321 10.0.1.2:5432
+
+Host sol-next-services
+  HostName 5.144.134.152
+  User user
+  IdentityFile .ssh/id_ed25519.pub
+  Port 22
+
+Host sol-next-infra
+  HostName 10.0.2.2
+  User user
+  IdentityFile .ssh/id_ed25519.pub
+  proxyjump sol-next-services 
+
+Host sol-next-db-proxy
+  HostName 5.144.134.152
+  User user
+  Port 22
+  IdentityFile ~/.ssh/id_ed25519
+  LocalForward 54322 10.0.2.2:5432
+
+Host sol-prod-services
+  HostName 5.144.134.153
+  User user
+  IdentityFile .ssh/id_ed25519.pub
+  Port 22
+
+Host sol-prod-infra
+  HostName 10.0.3.2
+  User user
+  IdentityFile .ssh/id_ed25519.pub
+  proxyjump sol-prod-services 
+
+Host sol-prod-db-proxy
+  HostName 5.144.134.153
+  User user
+  Port 22
+  IdentityFile ~/.ssh/id_ed25519
+  LocalForward 54323 10.0.3.2:5432
+
+Host repo
+  HostName 5.144.134.154
+  User user
+  IdentityFile .ssh/id_ed25519.pub
+  Port 22
+
+
