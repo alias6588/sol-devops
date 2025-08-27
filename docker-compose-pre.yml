@@ -8,6 +8,10 @@ services:
       - "443:443"  
     volumes:
       - /srv/sol/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /srv/sol/nginx/configs:/etc/nginx/conf.d:ro
+      - /srv/sol/nginx/certs:/etc/nginx/certs:ro
+      - /srv/sol/nginx/services:/etc/nginx/services.d:ro
+      - /srv/sol/nginx/snippets:/etc/nginx/snippets:ro
       - /srv/sol/nginx/logs:/var/log/nginx
       - /srv/sol/nginx/cache:/var/cache/nginx
       - /srv/sol/uploads:/srv/sol/uploads:ro

@@ -7,12 +7,6 @@ services:
       - ./.env
     volumes:
       - /etc/localtime:/etc/localtime:ro
-    # healthcheck:
-    #   test: ["CMD-SHELL", "curl -fsS http://localhost:8080/api/v1/ || exit 1"]
-    #   interval: 10s
-    #   timeout: 3s
-    #   retries: 3
-    #   start_period: 15s
     deploy:
       replicas: 1
       restart_policy:
@@ -34,12 +28,6 @@ services:
       - /srv/sol/uploads:/app/uploads
       - /srv/sol/results:/app/results
       - /etc/localtime:/etc/localtime:ro
-    # healthcheck:
-    #   test: ["CMD-SHELL", "curl -fsS http://localhost:8000/api/v1/ || exit 1"]
-    #   interval: 10s
-    #   timeout: 3s
-    #   retries: 3
-    #   start_period: 15s
     deploy:
       replicas: 1
       restart_policy:
@@ -52,7 +40,24 @@ services:
         order: start-first
     networks:
       - net1
-
+  sms-sender:
+    image: repo.notavaa.com:5000/sol/sms-sender:dev
+    env_file:
+      - ./.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 5
+      update_config:
+        parallelism: 1
+        delay: 3s
+        order: start-first
+    networks:
+      - net1
 networks:
   net1:
     external: true

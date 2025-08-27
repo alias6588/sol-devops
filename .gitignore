@@ -1,0 +1,4 @@
+**/*.key
+**/*.env
+**/certs
+docker-registry-certs/*
