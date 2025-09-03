@@ -4,7 +4,7 @@ services:
   postgres:
     image: repo.notavaa.com:5000/postgres:15
     ports:
-      - "5432:5432"
+      - "8541:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -34,8 +34,8 @@ services:
     networks:
       - net1
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "8542:5672"
+      - "18542:15672"
     env_file:
       - ./.env
     deploy:
