@@ -64,4 +64,19 @@ Host repo
   IdentityFile .ssh/id_ed25519.pub
   Port 22
 
+Host free
+  HostName 82.115.18.164
+  User root
+  IdentityFile .ssh/id_ed25519.pub
+  Port 22
+
+Host sol-repo-germany
+  HostName 103.75.199.157
+  User root
+  IdentityFile .ssh/id_ed25519.pub
+  Port 22
+
+
+
+
 

@@ -26,9 +26,11 @@ services:
       - net1
 
   nexus:
-    image: repo.notavaa.com:5000/sonatype/nexus3:3.83.1
+    image: sonatype/nexus3:3.82.1-alpine
     environment:
-      INSTALL4J_ADD_VM_PARAMS: "-Xms1024m -Xmx2048m -XX:MaxDirectMemorySize=2g"
+      INSTALL4J_ADD_VM_PARAMS: >
+        -Xms1024m -Xmx2048m -XX:MaxDirectMemorySize=2g
+        -Djava.util.prefs.userRoot=/nexus-data/java-prefs
     volumes:
       - /srv/sol/nexus-data:/nexus-data
       - /etc/localtime:/etc/localtime:ro
@@ -42,7 +44,7 @@ services:
         max_attempts: 5
 
   nginx:
-    image: repo.notavaa.com:5000/nginx:alpine
+    image: nginx:alpine
     ports:
       - "80:80"
       - "443:443"
