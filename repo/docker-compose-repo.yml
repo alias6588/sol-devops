@@ -43,19 +43,39 @@ services:
         delay: 5s
         max_attempts: 5
 
+  artifactory:
+    image: releases-docker.jfrog.io/jfrog/artifactory-oss:7.111.11
+    environment:
+      - EXTRA_JAVA_OPTIONS=-Xms2g -Xmx2g
+      - JF_SHARED_NODE_ID=artifactory-1
+    volumes:
+      - /srv/sol/artifactory-data:/var/opt/jfrog/artifactory
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - net1
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 5
+
+
   nginx:
     image: nginx:alpine
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      # کل دایرکتوری Nginx را به /etc/nginx می‌دهیم
       - /srv/sol/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - /srv/sol/nginx/configs:/etc/nginx/conf.d:ro
       - /srv/sol/nginx/certs:/etc/nginx/certs:ro
+      - /srv/sol/nginx/services:/etc/nginx/services.d:ro
+      - /srv/sol/nginx/snippets:/etc/nginx/snippets:ro
       - /srv/sol/nginx/logs:/var/log/nginx
       - /srv/sol/nginx/cache:/var/cache/nginx
-      - /etc/localtime:/etc/localtime:ro
+      - /srv/sol/uploads:/srv/sol/uploads:ro
+    deploy:
     deploy:
       replicas: 1
       restart_policy:

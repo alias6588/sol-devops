@@ -58,6 +58,25 @@ services:
         order: start-first
     networks:
       - net1
+  library:
+    image: repo.notavaa.com:5000/sol/library:dev
+    env_file:
+      - ./.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 5
+      update_config:
+        parallelism: 1
+        delay: 3s
+        order: start-first
+    networks:
+      - net1
+
 networks:
   net1:
     external: true
