@@ -34,7 +34,7 @@ Host sol-next-infra
 Host sol-next-db-proxy
   HostName 5.144.134.152
   User user
-  Port 22
+  Port 10021
   IdentityFile ~/.ssh/id_ed25519
   LocalForward 54322 10.0.2.2:5432
 

@@ -63,6 +63,8 @@ services:
     env_file:
       - ./.env
     volumes:
+      - /srv/sol/uploads:/app/uploads
+      - /srv/sol/results:/app/results
       - /etc/localtime:/etc/localtime:ro
     deploy:
       replicas: 1
