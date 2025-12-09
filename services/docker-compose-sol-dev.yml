@@ -20,8 +20,8 @@ services:
     networks:
       - net1
 
-  back:
-    image: repo.notavaa.com:5000/sol/back:dev
+  omr:
+    image: repo.notavaa.com:5000/sol/omr:dev
     env_file:
       - ./.env
     volumes:
@@ -29,7 +29,7 @@ services:
       - /srv/sol/results:/app/results
       - /etc/localtime:/etc/localtime:ro
     deploy:
-      replicas: 1
+      replicas: 4
       restart_policy:
         condition: any
         delay: 5s
