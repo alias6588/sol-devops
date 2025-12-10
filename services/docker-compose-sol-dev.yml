@@ -29,7 +29,7 @@ services:
       - /srv/sol/results:/app/results
       - /etc/localtime:/etc/localtime:ro
     deploy:
-      replicas: 4
+      replicas: 1
       restart_policy:
         condition: any
         delay: 5s

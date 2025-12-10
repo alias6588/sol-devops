@@ -17,6 +17,15 @@ Host sol-dev-db-proxy
   Port 22
   IdentityFile ~/.ssh/id_ed25519
   LocalForward 54321 10.0.1.2:5432
+  SessionType none
+
+Host sol-dev-rabbitmq-proxy
+  HostName 5.144.134.151
+  User user
+  Port 22
+  IdentityFile ~/.ssh/id_ed25519
+  LocalForward 15671 10.0.1.2:15672
+  SessionType none
 
 Host sol-next-services
   HostName 5.144.134.152
@@ -37,6 +46,15 @@ Host sol-next-db-proxy
   Port 10021
   IdentityFile ~/.ssh/id_ed25519
   LocalForward 54322 10.0.2.2:5432
+  SessionType none
+
+Host sol-next-rabbitmq-proxy
+  HostName 5.144.134.151
+  User user
+  Port 22
+  IdentityFile ~/.ssh/id_ed25519
+  LocalForward 15672 10.0.1.2:15672
+  SessionType none
 
 Host sol-prod-services
   HostName 5.144.134.153
@@ -57,6 +75,15 @@ Host sol-prod-db-proxy
   Port 22
   IdentityFile ~/.ssh/id_ed25519
   LocalForward 54323 10.0.3.2:8541
+  SessionType none
+
+Host sol-prod-rabbitmq-proxy
+  HostName 5.144.134.151
+  User user
+  Port 22
+  IdentityFile ~/.ssh/id_ed25519
+  LocalForward 15673 10.0.1.2:15672
+  SessionType none
 
 Host repo
   HostName 5.144.134.154
