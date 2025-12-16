@@ -5,6 +5,8 @@ services:
     image: repo.notavaa.com:5000/sol/profile:dev
     env_file:
       - ./.env
+    environment:
+      - IntegrationRabbit__ServiceName=profile
     volumes:
       - /etc/localtime:/etc/localtime:ro
     deploy:
@@ -29,7 +31,7 @@ services:
       - /srv/sol/results:/app/results
       - /etc/localtime:/etc/localtime:ro
     deploy:
-      replicas: 1
+      replicas: 4
       restart_policy:
         condition: any
         delay: 5s
@@ -44,6 +46,8 @@ services:
     image: repo.notavaa.com:5000/sol/sms-sender:dev
     env_file:
       - ./.env
+    environment:
+      - IntegrationRabbit__ServiceName=sms
     volumes:
       - /etc/localtime:/etc/localtime:ro
     deploy:
@@ -62,10 +66,32 @@ services:
     image: repo.notavaa.com:5000/sol/library:dev
     env_file:
       - ./.env
+    environment:
+      - IntegrationRabbit__ServiceName=library
     volumes:
       - /srv/sol/uploads:/app/uploads
       - /srv/sol/results:/app/results
       - /etc/localtime:/etc/localtime:ro
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 5
+      update_config:
+        parallelism: 1
+        delay: 3s
+        order: start-first
+    networks:
+      - net1
+  notifier:
+    image: repo.notavaa.com:5000/sol/notifier:dev
+    env_file:
+      - ./.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - IntegrationRabbit__ServiceName=notifier
     deploy:
       replicas: 1
       restart_policy:

@@ -103,6 +103,11 @@ Host sol-repo-germany
   IdentityFile .ssh/asus-fedora
   Port 22
 
+Host remote-dev-germany
+  HostName 103.75.199.157
+  User aliaskari
+  IdentityFile .ssh/asus-fedora
+  Port 22
 
 
 
