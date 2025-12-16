@@ -1,7 +1,7 @@
 Host sol-dev-services
   HostName 5.144.134.151
   User user
-  IdentityFile .ssh/asus-fedora.pub
+  IdentityFile .ssh/asus-fedora
   Port 22
 
 Host sol-dev-infra
@@ -11,21 +11,16 @@ Host sol-dev-infra
   proxyjump sol-dev-services 
   Port 22
 
-Host sol-dev-db-proxy
+Host sol-dev-tunnel
   HostName 5.144.134.151
   User user
   Port 22
   IdentityFile ~/.ssh/id_ed25519
+  # Postgres
   LocalForward 54321 10.0.1.2:5432
-  SessionType none
-
-Host sol-dev-rabbitmq-proxy
-  HostName 5.144.134.151
-  User user
-  Port 22
-  IdentityFile ~/.ssh/id_ed25519
+  # RabbitMQ dashboard
   LocalForward 15671 10.0.1.2:15672
-  SessionType none
+
 
 Host sol-next-services
   HostName 5.144.134.152
@@ -40,21 +35,15 @@ Host sol-next-infra
   proxyjump sol-next-services
   Port 22
 
-Host sol-next-db-proxy
+Host sol-next-tunnel
   HostName 5.144.134.152
   User user
   Port 10021
   IdentityFile ~/.ssh/id_ed25519
+  # Postgres
   LocalForward 54322 10.0.2.2:5432
-  SessionType none
-
-Host sol-next-rabbitmq-proxy
-  HostName 5.144.134.151
-  User user
-  Port 22
-  IdentityFile ~/.ssh/id_ed25519
-  LocalForward 15672 10.0.1.2:15672
-  SessionType none
+  # RabbitMQ dashboard
+  LocalForward 15672 10.0.2.2:15672
 
 Host sol-prod-services
   HostName 5.144.134.153
@@ -74,16 +63,10 @@ Host sol-prod-db-proxy
   User user
   Port 22
   IdentityFile ~/.ssh/id_ed25519
+  # Postgres
   LocalForward 54323 10.0.3.2:8541
-  SessionType none
-
-Host sol-prod-rabbitmq-proxy
-  HostName 5.144.134.151
-  User user
-  Port 22
-  IdentityFile ~/.ssh/id_ed25519
-  LocalForward 15673 10.0.1.2:15672
-  SessionType none
+  # RabbitMQ dashboard
+  LocalForward 15673 10.0.3.2:15672
 
 Host repo
   HostName 5.144.134.154
@@ -109,6 +92,19 @@ Host remote-dev-germany
   IdentityFile .ssh/asus-fedora
   Port 22
 
+Host remote-dev-germany-tunnels
+  HostName 103.75.199.157
+  User aliaskari
+  IdentityFile ~/.ssh/asus-fedora
+  Port 22
+
+  RemoteForward 25037 127.0.0.1:5037
+  RemoteForward 29000 127.0.0.1:19000
+  RemoteForward 29001 127.0.0.1:19001
+
+  ExitOnForwardFailure yes
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
 
 
 
