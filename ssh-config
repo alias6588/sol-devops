@@ -1,6 +1,6 @@
 Host sol-dev-services
   HostName 5.144.134.151
-  User user
+  User root
   IdentityFile .ssh/asus-fedora
   Port 22
 
