@@ -13,7 +13,7 @@ Host sol-dev-infra
 
 Host sol-dev-tunnel
   HostName 5.144.134.151
-  User user
+  User root
   Port 22
   IdentityFile ~/.ssh/id_ed25519
   # Postgres
