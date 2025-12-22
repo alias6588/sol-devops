@@ -76,7 +76,6 @@ services:
       - /srv/sol/nginx/cache:/var/cache/nginx
       - /srv/sol/uploads:/srv/sol/uploads:ro
     deploy:
-    deploy:
       replicas: 1
       restart_policy:
         condition: any

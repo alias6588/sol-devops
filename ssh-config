@@ -98,9 +98,9 @@ Host remote-dev-germany-tunnels
   IdentityFile ~/.ssh/asus-fedora
   Port 22
 
-  RemoteForward 25037 127.0.0.1:5037
-  RemoteForward 29000 127.0.0.1:19000
-  RemoteForward 29001 127.0.0.1:19001
+  RemoteForward 5037 127.0.0.1:5037
+  RemoteForward 9000 127.0.0.1:19000
+  RemoteForward 9001 127.0.0.1:19001
 
   ExitOnForwardFailure yes
   ServerAliveInterval 60
