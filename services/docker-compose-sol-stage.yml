@@ -5,6 +5,8 @@ services:
     image: repo.notavaa.com:5000/sol/profile:stage
     env_file:
       - ./.env
+    environment:
+      - IntegrationRabbit__ServiceName=profile
     volumes:
       - /etc/localtime:/etc/localtime:ro
     deploy:
@@ -20,10 +22,52 @@ services:
     networks:
       - net1
 
-  back:
-    image: repo.notavaa.com:5000/sol/back:stage
+  omr:
+    image: repo.notavaa.com:5000/sol/omr:stage
     env_file:
       - ./.env
+    volumes:
+      - /srv/sol/uploads:/app/uploads
+      - /srv/sol/results:/app/results
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      replicas: 4
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 5
+      update_config:
+        parallelism: 1
+        delay: 3s
+        order: start-first
+    networks:
+      - net1
+  sms-sender:
+    image: repo.notavaa.com:5000/sol/sms-sender:stage
+    env_file:
+      - ./.env
+    environment:
+      - IntegrationRabbit__ServiceName=sms
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 5
+      update_config:
+        parallelism: 1
+        delay: 3s
+        order: start-first
+    networks:
+      - net1
+  library:
+    image: repo.notavaa.com:5000/sol/library:stage
+    env_file:
+      - ./.env
+    environment:
+      - IntegrationRabbit__ServiceName=library
     volumes:
       - /srv/sol/uploads:/app/uploads
       - /srv/sol/results:/app/results
@@ -40,12 +84,14 @@ services:
         order: start-first
     networks:
       - net1
-  sms-sender:
-    image: repo.notavaa.com:5000/sol/sms-sender:stage
+  notifier:
+    image: repo.notavaa.com:5000/sol/notifier:stage
     env_file:
       - ./.env
     volumes:
       - /etc/localtime:/etc/localtime:ro
+    environment:
+      - IntegrationRabbit__ServiceName=notifier
     deploy:
       replicas: 1
       restart_policy:
@@ -58,6 +104,7 @@ services:
         order: start-first
     networks:
       - net1
+
 networks:
   net1:
     external: true
