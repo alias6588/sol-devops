@@ -104,6 +104,46 @@ services:
         order: start-first
     networks:
       - net1
+  payment:
+    image: repo.notavaa.com:5000/sol/payment:dev
+    env_file:
+      - ./.env
+    environment:
+      - IntegrationRabbit__ServiceName=payment
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 5
+      update_config:
+        parallelism: 1
+        delay: 3s
+        order: start-first
+    networks:
+      - net1
+  billing:
+    image: repo.notavaa.com:5000/sol/billing:dev
+    env_file:
+      - ./.env
+    environment:
+      - IntegrationRabbit__ServiceName=billing
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 5
+      update_config:
+        parallelism: 1
+        delay: 3s
+        order: start-first
+    networks:
+      - net1
 
 networks:
   net1:

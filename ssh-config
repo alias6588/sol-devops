@@ -98,8 +98,8 @@ Host remote-dev-germany-tunnels
   IdentityFile ~/.ssh/asus-fedora
   Port 22
 
-  RemoteForward 9000 127.0.0.1:19000
-  RemoteForward 9001 127.0.0.1:19001
+  RemoteForward 9000 127.0.0.1:9000
+  RemoteForward 9001 127.0.0.1:9001
   # The ADB Control Port
   RemoteForward 5037 127.0.0.1:5037
   # The Emulator Data Ports (Must include these!)
