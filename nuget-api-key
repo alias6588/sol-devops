@@ -1,16 +1,16 @@
-33eea78f-2e15-3e86-961c-7557e4c1ba76
+444871b1-88c0-3bfb-a62f-6fc4cabb8a41
 
 
-nuget setapikey 33eea78f-2e15-3e86-961c-7557e4c1ba76 -source https://repo.notavaa.com/repository/nuget-hosted/
+nuget setapikey 444871b1-88c0-3bfb-a62f-6fc4cabb8a41 -source https://repo.notavaa.com/repository/nuget-hosted/
 dotnet nuget add source "https://repo.notavaa.com/repository/nuget-group/index.json" -n SolNuGet
 dotnet pack -c Release
 dotnet nuget push "bin/Release/*.nupkg" \
   -s "https://repo.notavaa.com/repository/nuget-hosted/index.json" \
-  -k "33eea78f-2e15-3e86-961c-7557e4c1ba76" \
+  -k "444871b1-88c0-3bfb-a62f-6fc4cabb8a41" \
   --skip-duplicate
 
-33eea78f-2e15-3e86-961c-7557e4c1ba76
+444871b1-88c0-3bfb-a62f-6fc4cabb8a41
 
 
 
-33eea78f-2e15-3e86-961c-7557e4c1ba76
+444871b1-88c0-3bfb-a62f-6fc4cabb8a41
