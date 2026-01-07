@@ -80,11 +80,18 @@ Host free
   IdentityFile .ssh/asus-fedora
   Port 22
 
-Host sol-repo-germany
+Host sol-reg-germany
   HostName 103.75.199.157
   User root
   IdentityFile .ssh/asus-fedora
   Port 22
+
+Host sol-repo-iran
+  HostName 193.105.234.176
+  User root
+  IdentityFile .ssh/asus-fedora
+  Port 22
+
 
 Host remote-dev-germany
   HostName 103.75.199.157
